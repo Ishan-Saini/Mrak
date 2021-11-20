@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -17,6 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required'],
     minLength: 8,
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -28,7 +30,29 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords do not match',
     },
   },
+  passwordModifiedDate: Date,
 });
+
+userSchema.pre('save', async function (next) {
+  // Only runs if the password field is changed
+  if (!this.isModified('password')) return next();
+
+  this.password = await bcrypt.hash(this.password, 12);
+  this.passwordConfirm = undefined; // No need to show passwordConfirm field in DB
+});
+
+userSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
+    this.passwordModifiedDate = Date.now();
+  } else return next();
+});
+
+userSchema.methods.checkPassword = async function (
+  inputPassword,
+  userPassword
+) {
+  return await bcrypt.compare(inputPassword, userPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 

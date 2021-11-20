@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const asyncUtility = require('../util/asyncUtility');
+const ErrorClass = require('../util/errorUtility');
 const User = require('../models/userModel');
 
 const generateJwt = async (user, res, statusCode) => {
@@ -28,4 +29,18 @@ exports.signup = asyncUtility(async (req, res, next) => {
   });
 
   generateJwt(user, res, 201);
+});
+
+exports.login = asyncUtility(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password)
+    return next(new ErrorClass('Please provide both email and password', 400));
+
+  const user = await User.findOne({ email }).select('+password');
+
+  if (!user || !(await user.checkPassword(password, user.password)))
+    return next(new ErrorClass('Invalid email or password', 401));
+
+  generateJwt(user, res, 200);
 });
