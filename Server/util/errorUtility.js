@@ -3,7 +3,10 @@ class ErrorUtility extends Error {
     super(message);
     this.statusCode = statusCode;
     this.status = statusCode.toString().startsWith('4') ? 'fail' : 'error';
-    this.isOperational = true;
+    this.isOperational = true; //Check for non programming errors
+
+    //Capture the stack trace and remove the constructor call from it
+    Error.captureStackTrace(this, this.constructor);
   }
 }
 
