@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 
 const asyncUtility = require('../util/asyncUtility');
 const ErrorClass = require('../util/errorUtility');
@@ -11,7 +12,9 @@ const generateJwt = async (user, res, statusCode) => {
 
   const jwtCookieConfig = {
     httpOnly: true,
-    expires: process.env.JWT_COOKIE_EXPIRY * 24 * 60 * 60 * 1000,
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRY * 24 * 60 * 60 * 1000
+    ),
   };
 
   if (process.env.NODE_ENV === 'production') jwtCookieConfig.secure = true;
@@ -52,4 +55,45 @@ exports.login = asyncUtility(async (req, res, next) => {
     return next(new ErrorClass('Invalid email or password', 401));
 
   generateJwt(user, res, 200);
+});
+
+exports.protect = asyncUtility(async (req, res, next) => {
+  let token;
+
+  if (
+    // For development purpose
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    // Check for cookie
+    token = req.cookies.jwt;
+  }
+
+  if (!token)
+    return next(
+      new ErrorClass('Authentication failed! Please login/signup', 401)
+    );
+
+  const decodedToken = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_PRIVATE_KEY
+  );
+
+  const user = await User.findById(decodedToken.id);
+
+  if (!user)
+    return next(
+      new ErrorClass('No user found with that token. Please login again!', 401)
+    );
+
+  if (user.isPasswordChanged(decodedToken.iat))
+    return next(
+      new ErrorClass('Password recently changed. Please login again!', 401)
+    );
+
+  req.user = user;
+
+  next();
 });
