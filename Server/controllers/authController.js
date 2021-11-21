@@ -9,6 +9,15 @@ const generateJwt = async (user, res, statusCode) => {
     expiresIn: process.env.JWT_EXPIRY,
   });
 
+  const jwtCookieConfig = {
+    httpOnly: true,
+    expires: process.env.JWT_COOKIE_EXPIRY * 24 * 60 * 60 * 1000,
+  };
+
+  if (process.env.NODE_ENV === 'production') jwtCookieConfig.secure = true;
+
+  res.cookie('jwt', token, jwtCookieConfig);
+
   user.password = undefined;
 
   res.status(statusCode).json({
