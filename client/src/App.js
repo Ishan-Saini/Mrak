@@ -1,8 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/layout/Header/Header';
 
-function App() {
-  return <div className="App"></div>;
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Header />
+      <main></main>
+    </div>
+  );
+};
 
 export default App;

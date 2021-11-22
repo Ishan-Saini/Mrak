@@ -1,0 +1,12 @@
+.header-title {
+  color: #000;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-left: 4rem;
+  cursor: pointer;
+}
+
+.header-title > span {
+  color: #9c0000;
+  text-decoration: overline;
+}
