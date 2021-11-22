@@ -10,7 +10,7 @@
   height: 100%;
   width: 100%;
   background-color: black;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   position: relative;
 }
 
@@ -27,18 +27,17 @@
   outline: none;
   font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
-  padding: 0 1.5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0 1rem;
 }
 
 .header-search__btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  width: 10%;
   position: absolute;
-  right: 0;
+  right: 2%;
   top: 50%;
   transform: translateY(-50%);
 }
