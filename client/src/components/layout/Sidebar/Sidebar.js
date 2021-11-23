@@ -1,12 +1,11 @@
 import classes from './Sidebar.module.css';
+import Upload from './UploadForm/Upload';
 
 const Sidebar = () => {
   return (
     <aside>
       <div className={classes['sidebar-items__wrapper']}>
-        <div className={classes['upload-btn__container']}>
-          <button type="button">Upload</button>
-        </div>
+        <Upload />
       </div>
     </aside>
   );
