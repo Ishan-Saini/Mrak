@@ -1,7 +1,7 @@
 .App {
   display: grid;
   grid-template-rows: 10vh 90vh;
-  grid-template-columns: 15vw 85vw;
+  grid-template-columns: 17vw 83vw;
 }
 
 .App > header {

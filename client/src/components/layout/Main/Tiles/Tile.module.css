@@ -1,0 +1,24 @@
+.grid-items {
+  background-color: #fff;
+  border: 1px solid #dadce0;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 80% 20%;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.grid-items__img {
+  margin: auto;
+}
+
+.grid-items__title {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  border-top: 1px solid #dadce0;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

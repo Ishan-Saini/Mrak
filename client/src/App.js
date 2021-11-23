@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/layout/Header/Header';
+import Main from './components/layout/Main/Main';
 import Sidebar from './components/layout/Sidebar/Sidebar';
 
 const App = () => {
@@ -7,7 +8,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Sidebar />
-      <main></main>
+      <Main />
     </div>
   );
 };
