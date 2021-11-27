@@ -5,7 +5,9 @@ const fileController = require('../controllers/fileController');
 
 const router = express.Router();
 
-router.post('/upload', upload.single('mrak-upload'), fileController.encrypt);
-router.post('/download', fileController.decrypt);
+router.get('/', fileController.getAll);
+router.post('/upload', upload.single('mrak-upload'), fileController.upload);
+router.get('/download/:id', fileController.download);
+router.delete('/delete/:id', fileController.delete);
 
 module.exports = router;
