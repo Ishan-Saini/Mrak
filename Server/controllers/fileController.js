@@ -9,12 +9,18 @@ const asyncUtility = require('../util/asyncUtility');
 const ErrorClass = require('../util/errorUtility');
 const generateKey = require('../util/fileUtil/generateKey');
 
-// ENCRYPTION AND UPLOAD
-
-exports.upload = asyncUtility(async (req, res, next) => {
+const getBucket = () => {
   const gridFsBucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
     bucketName: 'uploads',
   });
+
+  return gridFsBucket;
+};
+
+// ENCRYPTION AND UPLOAD
+
+exports.upload = asyncUtility(async (req, res, next) => {
+  const gridFsBucket = getBucket();
 
   //Create an initialization vector
   const initVector = crypto.randomBytes(16);
@@ -64,9 +70,7 @@ exports.upload = asyncUtility(async (req, res, next) => {
 // DECRYPTION AND DOWNLOAD
 
 exports.download = asyncUtility(async (req, res, next) => {
-  const gridFsBucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
-    bucketName: 'uploads',
-  });
+  const gridFsBucket = getBucket();
 
   const query = gridFsBucket.find({
     _id: mongoose.Types.ObjectId(req.params.id),
@@ -112,8 +116,31 @@ exports.download = asyncUtility(async (req, res, next) => {
 
 // GET ALL FILES
 
-exports.getAll = asyncUtility(async (req, res, next) => {});
+exports.getAll = asyncUtility(async (req, res, next) => {
+  const gridFsBucket = getBucket();
+
+  const query = gridFsBucket.find({});
+  const files = await query.toArray();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      files,
+    },
+  });
+});
 
 // DELETION
 
-exports.delete = asyncUtility(async (req, res, next) => {});
+exports.delete = asyncUtility(async (req, res, next) => {
+  const gridFsBucket = getBucket();
+
+  gridFsBucket.delete(mongoose.Types.ObjectId(req.params.id), (err) =>
+    next(new ErrorClass(`${err}`, 500))
+  );
+
+  res.status(200).json({
+    status: 'success',
+    message: 'File deleted successfully',
+  });
+});
