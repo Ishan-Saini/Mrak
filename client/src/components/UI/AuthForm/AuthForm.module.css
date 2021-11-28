@@ -1,0 +1,83 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.loginForm h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.inputBox {
+  width: 100%;
+  height: 3rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  background: #fff;
+  border: 0.2rem solid #888888;
+  border-radius: 0.3rem;
+  font-family: inherit;
+}
+
+.passwordInput,
+.confirmPasswordInput {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: 0.125em;
+}
+
+.inputBox:not(:last-of-type) {
+  margin-bottom: 1.2rem;
+}
+
+.inputBox:hover {
+  border-color: #616161;
+}
+
+.inputBox:focus {
+  border-color: #000;
+}
+
+.label {
+  color: #000;
+  font-size: 0.9rem;
+}
+
+.reset-link {
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  color: #5d5d5d;
+}
+
+.reset-link:hover {
+  color: #000;
+}
+
+.switch-link {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #5d5d5d;
+  text-decoration: none;
+}
+
+.switch-link:hover {
+  color: #000;
+}
+
+.submitBtn {
+  margin-top: 1.2rem;
+  color: #fff;
+  background: #000;
+  height: 2.2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.3rem;
+}
+
+.submitBtn:hover {
+  background: rgba(0, 0, 0, 0.822);
+}

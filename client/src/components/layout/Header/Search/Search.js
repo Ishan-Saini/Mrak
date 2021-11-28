@@ -7,7 +7,7 @@ const Search = () => {
     <div className={classes['header-search__container']}>
       <form className={classes['header-search__form']}>
         <div className={classes['header-search-input__container']}>
-          <input type="text" name="search-box" />
+          <input type="text" name="search-box" placeholder="Search in Mrak" />
         </div>
         <button className={classes['header-search__btn']}>
           <IconContext.Provider value={{ color: 'white', size: '0.8rem' }}>

@@ -7,6 +7,21 @@
   font-weight: 600;
 }
 
+.upload-file__input {
+  margin-bottom: 0.5rem;
+}
+
+.upload-password__label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.upload-file__password {
+  padding: 0.1rem 0.2rem;
+  outline: none;
+  width: 80%;
+}
+
 .upload-btn__container {
   height: 3rem;
   width: 7rem;

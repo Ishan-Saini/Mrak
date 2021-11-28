@@ -17,7 +17,7 @@
   position: absolute;
   right: 0;
   width: 9rem;
-  background: #cecece;
+  background: #c3cfd8;
   z-index: 100;
   padding: 0.5rem;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
@@ -48,7 +48,7 @@
 
 .dropdown-menu a:hover,
 .dropdown-menu button:hover {
-  background: #bbbbbb;
+  background: #a8b3bb;
 }
 
 .dropdown > .dropdown-btn:focus + .dropdown-menu {

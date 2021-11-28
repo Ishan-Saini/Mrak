@@ -1,11 +1,11 @@
 import classes from './Main.module.css';
-import Tile from './Tiles/Tile';
+import Files from './Tiles/Files';
 
 const Main = () => {
   return (
     <main>
       <div className={classes['main-wrapper']}>
-        <Tile />
+        <Files />
       </div>
     </main>
   );

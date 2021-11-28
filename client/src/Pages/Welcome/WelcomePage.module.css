@@ -1,0 +1,44 @@
+.landingPage {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.landing-svg__container {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 2;
+  position: relative;
+}
+
+.landing-svg {
+  max-width: 50%;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.landing-text__container {
+  text-align: center;
+  grid-column: 1 / span 3;
+  grid-row: 3 / span 1;
+}
+
+.landing-text__container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.landing-text__container p {
+  font-size: 1.2rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.landing-form__container {
+  background-color: #dfe5eb;
+  grid-row: 1 / span 3;
+  grid-column: 4 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

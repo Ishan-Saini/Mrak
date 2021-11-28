@@ -1,0 +1,17 @@
+.msg {
+  padding: 0.3rem 0.3rem;
+  width: 100%;
+  word-wrap: break-word;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.success-msg {
+  background-color: rgb(98, 214, 143);
+  border-left: 0.3rem solid rgb(0, 110, 0);
+}
+
+.error-msg {
+  background-color: rgba(255, 177, 177, 0.657);
+  border-left: 0.3rem solid red;
+}
