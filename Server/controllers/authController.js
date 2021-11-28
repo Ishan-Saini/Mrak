@@ -5,7 +5,7 @@ const asyncUtility = require('../util/asyncUtility');
 const ErrorClass = require('../util/errorUtility');
 const User = require('../models/userModel');
 
-const generateJwt = async (user, res, statusCode) => {
+const generateJwt = (user, res, statusCode) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_PRIVATE_KEY, {
     expiresIn: process.env.JWT_EXPIRY,
   });
@@ -96,4 +96,49 @@ exports.protect = asyncUtility(async (req, res, next) => {
   req.user = user;
 
   next();
+});
+
+exports.checkUser = asyncUtility(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    const token = req.cookies.jwt;
+
+    const decoded = await promisify(jwt.verify)(
+      token,
+      process.env.JWT_PRIVATE_KEY
+    );
+
+    const loggedInUser = await User.findById(decoded.id);
+
+    if (!loggedInUser)
+      return next(new ErrorClass('This user has been deleted!', 401));
+
+    if (loggedInUser.isPasswordChanged(decoded.iat)) {
+      return next(
+        new ErrorClass(
+          'Password has been changed recently, please log in again!',
+          401
+        )
+      );
+    }
+
+    res.status(200).json({
+      message: 'success',
+      data: {
+        user: loggedInUser,
+      },
+    });
+  } else {
+    return next(new ErrorClass('Please login!', 401));
+  }
+});
+
+exports.logout = asyncUtility(async (req, res, next) => {
+  res.cookie('jwt', 'userLoggedOut', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+  });
 });
