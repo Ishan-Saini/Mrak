@@ -39,12 +39,14 @@ userSchema.pre('save', async function (next) {
 
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined; // No need to show passwordConfirm field in DB
+  next();
 });
 
 userSchema.pre('save', function (next) {
   if (this.isModified('password')) {
     this.passwordModifiedDate = Date.now();
   } else return next();
+  next();
 });
 
 userSchema.methods.checkPassword = async function (

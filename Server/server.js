@@ -1,17 +1,22 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: './config.env' });
+process.on('uncaughtException', (err) => {
+  console.log('Unhandled rejection! Closing...');
+  console.log(`${err.name}: ${err.message}`);
+  process.exit(1);
+});
 
+dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-const db = process.env.DATABASE.replace(
+const uri = process.env.DATABASE.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
 );
 
 mongoose
-  .connect(db, {
+  .connect(uri, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
@@ -23,6 +28,14 @@ mongoose
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.log('Unhandled rejection! Closing...');
+  console.log(`${err.name}: ${err.message}`);
+  server.close(() => {
+    process.exit(1);
+  });
 });
