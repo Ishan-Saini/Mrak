@@ -1,11 +1,11 @@
 import classes from './Sidebar.module.css';
 import Upload from './UploadForm/Upload';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
     <aside>
       <div className={classes['sidebar-items__wrapper']}>
-        <Upload />
+        <Upload refreshToggler={props.refreshToggler} />
       </div>
     </aside>
   );

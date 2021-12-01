@@ -1,11 +1,11 @@
 import classes from './Main.module.css';
 import Files from './Tiles/Files';
 
-const Main = () => {
+const Main = (props) => {
   return (
     <main>
       <div className={classes['main-wrapper']}>
-        <Files />
+        <Files refresh={props.refresh} />
       </div>
     </main>
   );

@@ -11,13 +11,33 @@
   margin: auto;
 }
 
+.grid-items__info {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #dadce0;
+}
+
 .grid-items__title {
-  width: 100%;
+  width: 90%;
   padding: 0.5rem 0.7rem;
   font-size: 0.9rem;
-  border-top: 1px solid #dadce0;
+
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.grid-items-download-btn__container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.grid-items-download__btn {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }

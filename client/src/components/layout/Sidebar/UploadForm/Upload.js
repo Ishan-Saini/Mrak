@@ -7,7 +7,7 @@ const initialUploadState = {
   password: '',
 };
 
-const Upload = () => {
+const Upload = (props) => {
   const [uploadState, setUploadState] = useState(initialUploadState);
 
   const onFileChange = (e) => {
@@ -28,7 +28,7 @@ const Upload = () => {
     e.preventDefault();
     const uploadFormData = new FormData();
     uploadFormData.append('password', uploadState.password);
-    uploadFormData.append('file', uploadState.file);
+    uploadFormData.append('mrak-upload', uploadState.file);
     try {
       await axios({
         method: 'POST',
@@ -37,8 +37,10 @@ const Upload = () => {
         data: uploadFormData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+      props.refreshToggler();
+      setUploadState(initialUploadState);
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
     }
   };
 
