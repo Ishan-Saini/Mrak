@@ -8,6 +8,7 @@ const AppendInitVector = require('../util/fileUtil/AppendInitVector');
 const asyncUtility = require('../util/asyncUtility');
 const ErrorClass = require('../util/errorUtility');
 const generateKey = require('../util/fileUtil/generateKey');
+const User = require('../models/userModel');
 
 const getBucket = () => {
   const gridFsBucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
@@ -17,9 +18,19 @@ const getBucket = () => {
   return gridFsBucket;
 };
 
+const checkPassword = async (req) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId).select('+password');
+
+  return await user.checkPassword(req.body.password, user.password);
+};
+
 // ENCRYPTION AND UPLOAD
 
 exports.upload = asyncUtility(async (req, res, next) => {
+  if (!(await checkPassword(req)))
+    return next(new ErrorClass('Failed: Incorrect password', 401));
+
   const gridFsBucket = getBucket();
 
   //Create an initialization vector
@@ -70,6 +81,9 @@ exports.upload = asyncUtility(async (req, res, next) => {
 // DECRYPTION AND DOWNLOAD
 
 exports.download = asyncUtility(async (req, res, next) => {
+  if (!(await checkPassword(req)))
+    return next(new ErrorClass('Failed: Incorrect password', 401));
+
   const gridFsBucket = getBucket();
 
   const query = gridFsBucket.find({
