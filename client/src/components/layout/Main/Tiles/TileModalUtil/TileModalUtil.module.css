@@ -1,0 +1,62 @@
+.download-form__container {
+  height: 25vh;
+  width: 100%;
+}
+
+.download-form__container > h2 {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.download-form {
+  height: 90%;
+  width: 100%;
+  position: relative;
+}
+
+.download-password__container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.download-password__input {
+  padding: 0.3rem;
+  font-size: 1rem;
+  width: 60%;
+  margin-left: 0.5rem;
+}
+
+.modal-btn__container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 1rem;
+  right: 0.5rem;
+}
+
+.modal-action__btn {
+  padding: 0.5rem;
+  border: none;
+  color: #fff;
+  background-color: #4f7599;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 1rem;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.download-password-btn:hover {
+  background-color: #50718f;
+}
+
+.delete-modal {
+  height: 10vh;
+}
+
+.delete-modal > h2 {
+  margin-left: 1rem;
+}

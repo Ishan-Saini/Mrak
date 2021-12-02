@@ -28,16 +28,19 @@
   white-space: nowrap;
 }
 
-.grid-items-download-btn__container {
+.grid-items-btn__container {
   display: flex;
   align-items: center;
+  flex-direction: row;
   height: 100%;
 }
 
-.grid-items-download__btn {
+.grid-items-download__btn,
+.grid-items-delete__btn {
   background: none;
   outline: none;
   border: none;
   cursor: pointer;
   width: 100%;
+  margin-right: 0.2rem;
 }
