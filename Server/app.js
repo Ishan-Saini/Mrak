@@ -1,4 +1,5 @@
 const express = require('express');
+const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -31,6 +32,7 @@ app.use(
   })
 );
 
+app.use(fileupload());
 app.use(express.json());
 app.use(cookieParser());
 

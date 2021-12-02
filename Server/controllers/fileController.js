@@ -1,8 +1,8 @@
 const crypto = require('crypto');
 const zlib = require('zlib');
-const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const streamifier = require('streamifier');
 
 const AppendInitVector = require('../util/fileUtil/AppendInitVector');
 const asyncUtility = require('../util/asyncUtility');
@@ -32,6 +32,7 @@ exports.upload = asyncUtility(async (req, res, next) => {
     return next(new ErrorClass('Failed: Incorrect password', 401));
 
   const gridFsBucket = getBucket();
+  const file = req.files['mrak-upload'];
 
   //Create an initialization vector
   const initVector = crypto.randomBytes(16);
@@ -41,26 +42,19 @@ exports.upload = asyncUtility(async (req, res, next) => {
   const gzip = zlib.createGzip();
   const appendInitVector = new AppendInitVector(initVector);
   const cipher = crypto.createCipheriv('aes-256-cbc', key, initVector);
-  const readStream = fs.createReadStream(req.file.path);
 
-  readStream.on('end', () => {
-    fs.unlink(req.file.path, (err) => {
-      if (err) return new Error('Error deleting files');
-    });
-  });
+  const originalname = file.name;
+  const filename = file.name.replace(path.extname(file.name), '.enc');
 
-  const filename = req.file.originalname.replace(
-    path.extname(req.file.originalname),
-    '.enc'
-  );
+  const readStream = streamifier.createReadStream(file.data);
 
   const writeStream = gridFsBucket.openUploadStream(filename, {
     metadata: {
-      fieldname: req.file.fieldname,
-      originalname: req.file.originalname,
-      encoding: req.file.encoding,
-      mimetype: req.file.mimetype,
-      size: req.file.size,
+      originalname,
+      encoding: file.encoding,
+      mimetype: file.mimetype,
+      size: file.size,
+      user: req.user._id,
     },
   });
 
@@ -133,7 +127,9 @@ exports.download = asyncUtility(async (req, res, next) => {
 exports.getAll = asyncUtility(async (req, res, next) => {
   const gridFsBucket = getBucket();
 
-  const query = gridFsBucket.find({});
+  const query = gridFsBucket.find({
+    'metadata.user': mongoose.Types.ObjectId(req.user.id),
+  });
   const files = await query.toArray();
 
   res.status(200).json({
