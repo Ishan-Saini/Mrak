@@ -145,12 +145,9 @@ exports.getAll = asyncUtility(async (req, res, next) => {
 exports.delete = asyncUtility(async (req, res, next) => {
   const gridFsBucket = getBucket();
 
-  gridFsBucket.delete(mongoose.Types.ObjectId(req.params.id), (err) =>
-    next(new ErrorClass(`${err}`, 500))
-  );
+  gridFsBucket.delete(mongoose.Types.ObjectId(req.params.id));
 
-  res.status(200).json({
+  res.status(204).json({
     status: 'success',
-    message: 'File deleted successfully',
   });
 });
