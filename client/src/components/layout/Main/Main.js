@@ -1,12 +1,17 @@
 import classes from './Main.module.css';
-import Files from './Tiles/Files';
+import Files from './Files/Files';
+import { Route, Switch } from 'react-router-dom';
 
 const Main = (props) => {
   return (
     <main>
-      <div className={classes['main-wrapper']}>
-        <Files refresh={props.refresh} />
-      </div>
+      <Switch>
+        <Route path="/files">
+          <div className={classes['files-wrapper']}>
+            <Files refresh={props.refresh} />
+          </div>
+        </Route>
+      </Switch>
     </main>
   );
 };
