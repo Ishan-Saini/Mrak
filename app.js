@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
+const path = require('path');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
 
@@ -39,6 +40,10 @@ app.use(cookieParser());
 app.use(mongoSanitize());
 
 app.use(xss());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/files', authController.protect, fileRoutes);

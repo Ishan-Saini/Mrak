@@ -4,7 +4,9 @@
   "description": "secure cloud storage system",
   "main": "server.js",
   "scripts": {
-    "start:dev": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -43,5 +45,8 @@
     "eslint-plugin-react": "^7.24.0",
     "nodemon": "^2.0.10",
     "prettier": "^2.3.2"
+  },
+  "engines": {
+    "node": ">=10.0.0 <17"
   }
 }
