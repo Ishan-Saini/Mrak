@@ -8,7 +8,7 @@ const DeleteTile = (props) => {
     try {
       await axios({
         method: 'DELETE',
-        url: `http://127.0.0.1:5000/api/v1/files/delete/${props.fileId}`,
+        url: `/api/v1/files/delete/${props.fileId}`,
         withCredentials: true,
       });
       props.onClose();

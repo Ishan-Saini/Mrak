@@ -15,7 +15,7 @@ const DownloadTile = (props) => {
     try {
       const res = await axios({
         method: 'POST',
-        url: `http://127.0.0.1:5000/api/v1/files/download/${props.fileId}`,
+        url: `/api/v1/files/download/${props.fileId}`,
         withCredentials: true,
         responseType: 'blob',
         data: {

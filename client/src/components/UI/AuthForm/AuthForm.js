@@ -43,9 +43,7 @@ const AuthForm = (props) => {
     try {
       const res = await axios({
         method: 'POST',
-        url: `http://127.0.0.1:5000/api/v1/users/${
-          isUser ? 'login' : 'signup'
-        }`,
+        url: `/api/v1/users/${isUser ? 'login' : 'signup'}`,
         withCredentials: true,
         data: {
           ...(!isUser && {

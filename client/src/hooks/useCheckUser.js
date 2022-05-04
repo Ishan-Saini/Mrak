@@ -10,7 +10,7 @@ const useCheckUser = () => {
       try {
         const res = await axios({
           method: 'GET',
-          url: 'http://127.0.0.1:5000/api/v1/users/checkUser',
+          url: '/api/v1/users/checkUser',
           withCredentials: true,
         });
         const resUser = res.data.data.user;
