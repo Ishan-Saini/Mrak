@@ -31,7 +31,7 @@ const DownloadTile = (props) => {
       link.click();
       props.onClose();
     } catch (err) {
-      console.log(err.res.data.message);
+      //console.log(err.res.data.message);
     }
   };
 

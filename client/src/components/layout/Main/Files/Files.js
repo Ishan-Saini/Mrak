@@ -27,7 +27,7 @@ const Files = (props) => {
         });
         setFilesArray(res.data.data.files);
       } catch (err) {
-        console.log(err.response.data.message);
+        //console.log(err.response.data.message);
       }
     };
 

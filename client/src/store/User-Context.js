@@ -28,7 +28,7 @@ export const UserContextProvider = (props) => {
       });
       window.location.reload(true);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

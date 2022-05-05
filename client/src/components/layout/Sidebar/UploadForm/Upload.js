@@ -40,7 +40,7 @@ const Upload = (props) => {
       props.refreshToggler();
       setUploadState(initialUploadState);
     } catch (err) {
-      console.log(err.response);
+      //console.log(err.response);
     }
   };
 
