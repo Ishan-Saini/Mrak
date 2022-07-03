@@ -6,7 +6,19 @@
   cursor: pointer;
 }
 
-.header-title > span {
+.header-title__initial {
   color: #9c0000;
   text-decoration: overline;
+}
+
+@media screen and (max-width: 768px) {
+  .header-title {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-left: 1.25rem;
+  }
+
+  .header-title__rest {
+    display: none;
+  }
 }

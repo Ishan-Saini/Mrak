@@ -28,3 +28,13 @@
 .landing {
   grid-column: 1 / span 2;
 }
+
+@media screen and (max-width: 768px) {
+  .App > aside {
+    display: none;
+  }
+
+  .App > main {
+    grid-column: 1 / span 2;
+  }
+}

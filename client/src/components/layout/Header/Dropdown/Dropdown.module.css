@@ -55,3 +55,9 @@
   visibility: visible;
   transform: translateY(0);
 }
+
+@media screen and (max-width: 768px) {
+  .dropdown-wrapper {
+    right: 5%;
+  }
+}

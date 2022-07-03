@@ -9,6 +9,7 @@
 
 .upload-file__input {
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .upload-password__label {
@@ -19,7 +20,7 @@
 .upload-file__password {
   padding: 0.1rem 0.2rem;
   outline: none;
-  width: 80%;
+  width: 100%;
 }
 
 .upload-btn__container {

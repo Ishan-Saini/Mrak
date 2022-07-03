@@ -7,4 +7,12 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 1rem;
+  overflow: scroll;
+}
+
+@media screen and (max-width: 768px) {
+  .files-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
 }

@@ -9,7 +9,8 @@ const Header = () => {
   return (
     <header>
       <div className={classes['header-title']}>
-        <span>M</span>rak
+        <span className={classes['header-title__initial']}>M</span>
+        <span className={classes['header-title__rest']}>rak</span>
       </div>
       {userCtx.isLoggedIn && <Search />}
       {userCtx.isLoggedIn && <Dropdown />}

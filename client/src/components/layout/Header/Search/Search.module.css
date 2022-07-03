@@ -41,3 +41,26 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+@media screen and (max-width: 768px) {
+  .header-search__container {
+    width: 60%;
+    height: 2rem;
+    left: 50%;
+  }
+
+  .header-search-input__container > input {
+    font-size: 0.8rem;
+    padding: 0 0.8rem;
+    width: 95%;
+  }
+
+  .header-search__btn {
+    right: 3%;
+    top: 55%;
+    transform: translateY(-50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+}

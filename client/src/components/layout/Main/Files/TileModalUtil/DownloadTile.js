@@ -44,7 +44,12 @@ const DownloadTile = (props) => {
           onSubmit={dwFormSubmitHandler}
         >
           <div className={classes['download-password__container']}>
-            <label htmlFor="dw-pass">PASSWORD :</label>
+            <label
+              className={classes['download-password-container__label']}
+              htmlFor="dw-pass"
+            >
+              PASSWORD :
+            </label>
             <input
               type="password"
               name="dw-password"

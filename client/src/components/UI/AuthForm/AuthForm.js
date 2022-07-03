@@ -15,7 +15,7 @@ const initialFormState = {
 
 const AuthForm = (props) => {
   const [isUser, setIsUser] = useState(
-    window.location.pathname === '/login' ? true : false
+    window.location.hash === '#/login' ? true : false
   );
   const [authState, setAuthState] = useState(initialFormState);
   const history = useHistory();

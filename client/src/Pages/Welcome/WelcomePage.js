@@ -18,9 +18,23 @@ const WelcomePage = (props) => {
         <div className={classes['landing-svg__container']}>
           <img src={cloud} alt="cloud" className={classes['landing-svg']} />
         </div>
-        <div className={classes['landing-text__container']}>
-          <h1>MRAK | Secure cloud storage</h1>
+        <div className={classes['landing-content__container']}>
+          <h1>Secure cloud storage</h1>
           <p>Keep your files safe</p>
+          <div className={classes['landing-content-btn__container']}>
+            <button
+              type="button"
+              className={classes['landing-content__auth-btn']}
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              className={classes['landing-content__auth-btn']}
+            >
+              Signup
+            </button>
+          </div>
         </div>
         <div className={classes['landing-form__container']}>
           <AuthForm />
