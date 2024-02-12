@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "build": "npm install  && cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
